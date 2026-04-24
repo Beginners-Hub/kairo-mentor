@@ -1,0 +1,33 @@
+# Common
+.DS_Store
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Local Storage/Data (Project Specific)
+backend/storage/*.json
+backend/data/notes_cache.json
+!backend/data/career_paths.json
+!backend/data/colleges.json
+!backend/data/tasks.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo

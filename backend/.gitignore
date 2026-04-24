@@ -1,0 +1,5 @@
+.env
+__pycache__/
+*.pyc
+storage/*.json
+data/notes_cache.json
