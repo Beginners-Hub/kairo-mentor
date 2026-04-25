@@ -62,6 +62,18 @@ export const AppProvider = ({ children }) => {
 
   const [fullUserData, setFullUserData] = useState(null);
 
+  // ── Focus Timer State ──
+  const [focusMinutes, setFocusMinutes] = useState(() => {
+    return parseInt(localStorage.getItem('kairo_focus_minutes')) || 0;
+  });
+  const addFocusMinutes = (mins) => {
+    setFocusMinutes(prev => {
+      const next = prev + Math.round(mins);
+      localStorage.setItem('kairo_focus_minutes', next);
+      return next;
+    });
+  };
+
   const logout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
@@ -82,6 +94,7 @@ export const AppProvider = ({ children }) => {
         journeyProgress, setJourneyProgress,
         currentDay, updateCurrentDay,
         fullUserData, setFullUserData,
+        focusMinutes, addFocusMinutes,
         logout
       }}
     >

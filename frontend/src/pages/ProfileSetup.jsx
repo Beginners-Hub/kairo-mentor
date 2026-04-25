@@ -159,6 +159,23 @@ const ProfileSetup = () => {
 
   const next = () => {
     setError('');
+    
+    if (step === 0) {
+      const isValid = /^[a-zA-Z\s]+$/.test(name.trim());
+      if (!isValid) {
+        setError('Please enter a valid name (letters only)');
+        return;
+      }
+    }
+
+    if (step === 1 && studentType === '12th Passout') {
+      const rank = parseInt(kcetRank);
+      if (!kcetRank.trim() || isNaN(rank) || rank <= 0) {
+        setError('Please enter a valid KCET rank');
+        return;
+      }
+    }
+
     if (step < steps.length - 1) {
       setStep(step + 1);
     } else {
@@ -200,8 +217,9 @@ const ProfileSetup = () => {
                 label="Your Name"
                 placeholder="e.g. Arjun"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => { setName(e.target.value); setError(''); }}
                 icon={<User size={20} strokeWidth={1.5} />}
+                error={!!error && step === 0}
               />
             )}
 
@@ -232,8 +250,9 @@ const ProfileSetup = () => {
                       placeholder="e.g. 12500"
                       type="number"
                       value={kcetRank}
-                      onChange={(e) => setKcetRank(e.target.value)}
+                      onChange={(e) => { setKcetRank(e.target.value); setError(''); }}
                       icon={<Hash size={20} strokeWidth={1.5} />}
+                      error={!!error && step === 1}
                     />
                   </motion.div>
                 )}

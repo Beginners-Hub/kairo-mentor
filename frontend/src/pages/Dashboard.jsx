@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -12,6 +12,7 @@ import StreakCard from '../components/StreakCard';
 import ContributionGrid from '../components/ContributionGrid';
 import VideoModal from '../components/VideoModal';
 import QuizModal from '../components/QuizModal';
+import CollegePredictor from './CollegePredictor';
 import { useAppContext } from '../context/AppContext';
 import './Dashboard.css';
 
@@ -146,13 +147,56 @@ const Dashboard = () => {
      }).catch(console.error);
   };
 
+
+  // ── IST Greeting Logic ────────────────────────────────────────────────────
+  const getGreetingConfig = useCallback(() => {
+    // Use local system time (IST on user's device)
+    const hour = new Date().getHours();
+
+    // Hustle phases → weight 900, solid black, tight tracking
+    const hardcore = {
+      color: '#000000',
+      fontWeight: 900,
+      letterSpacing: '-0.02em',
+    };
+    // Standard phases → weight 500, still solid black for max contrast
+    const standard = {
+      color: '#000000',
+      fontWeight: 500,
+    };
+
+    // 12:00 AM – 4:59 AM
+    if (hour >= 0  && hour < 5)  return { text: 'Elite Hours! 💎',      style: hardcore };
+    // 5:00 AM – 8:59 AM
+    if (hour >= 5  && hour < 9)  return { text: 'Good morning ☀️',      style: standard };
+    // 9:00 AM – 11:59 AM
+    if (hour >= 9  && hour < 12) return { text: 'Morning Grinding! ⚙️', style: hardcore };
+    // 12:00 PM – 4:59 PM
+    if (hour >= 12 && hour < 17) return { text: 'Good afternoon ☕',     style: standard };
+    // 5:00 PM – 8:59 PM
+    if (hour >= 17 && hour < 21) return { text: 'Good evening 🌆',       style: standard };
+    // 9:00 PM – 11:59 PM
+    return                               { text: 'Grinding! 🔥',          style: hardcore };
+  }, []);
+
+  // Live-update the greeting every minute so it switches automatically
+  const [greetingConfig, setGreetingConfig] = useState(() => getGreetingConfig());
+
+  useEffect(() => {
+    setGreetingConfig(getGreetingConfig());
+    const id = setInterval(() => setGreetingConfig(getGreetingConfig()), 60_000);
+    return () => clearInterval(id);
+  }, [getGreetingConfig]);
+
   return (
     <div className="dashboard lg:pl-64 min-h-screen bg-[#F8F8F8]">
       <motion.div className="dashboard__content max-w-5xl mx-auto p-4 lg:p-10 lg:pt-8" variants={container} initial="hidden" animate="show">
         {/* Header */}
         <motion.div className="dashboard__header" variants={item}>
           <div>
-            <p className="dashboard__greeting">Good morning,</p>
+            <p className="dashboard__greeting" style={greetingConfig.style}>
+              {greetingConfig.text}
+            </p>
             <h1 className="dashboard__name">{displayName} ✨</h1>
           </div>
           <div className="dashboard__avatar" onClick={handleLogout} style={{ cursor: 'pointer' }} title="Log out">

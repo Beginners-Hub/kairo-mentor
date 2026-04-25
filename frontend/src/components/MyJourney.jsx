@@ -112,7 +112,6 @@ const MyJourney = () => {
     <div className="my-journey">
       <div className="my-journey__header">
         <h2 className="my-journey__title">My Journey</h2>
-        <span className="my-journey__career-badge">{selectedCareer}</span>
       </div>
 
       {loading && (
