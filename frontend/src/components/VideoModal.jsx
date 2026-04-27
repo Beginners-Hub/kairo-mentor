@@ -20,7 +20,7 @@ const VideoModal = ({ isOpen, onClose, video }) => {
     if (isOpen && video?.title) {
         setLoading(true);
         // Avoid regenerating if identical video
-        fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/generate_video_notes`, {
+        fetch(`${import.meta.env.VITE_API_URL || 'https://kairo-mentor.onrender.com'}/api/generate_video_notes`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ video_title: video.title })

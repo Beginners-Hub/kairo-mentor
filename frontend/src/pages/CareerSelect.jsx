@@ -54,7 +54,7 @@ const CareerSelect = () => {
   useEffect(() => {
     if (is12thPassout) {
       setLoadingColleges(true);
-      fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/get_college_suggestions`, {
+      fetch(`${import.meta.env.VITE_API_URL || 'https://kairo-mentor.onrender.com'}/api/get_college_suggestions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rank: profile.kcet_rank || profile.rank || 0, exam_type: 'KCET' })
@@ -90,7 +90,7 @@ const CareerSelect = () => {
 
     // Save to backend — career_path is resolved server-side to a course_id
     const userId = (updatedProfile.name || 'Student').toLowerCase().replace(/\s+/g, '_') || 'demo_user';
-    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/create_user`, {
+    fetch(`${import.meta.env.VITE_API_URL || 'https://kairo-mentor.onrender.com'}/api/create_user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

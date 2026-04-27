@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 # ─── App Initialization ────────────────────────────────────────────────────────
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173", "http://localhost:3000"])
+CORS(app)
 
 # ─── Register Blueprints ───────────────────────────────────────────────────────
 from routes.career_routes import career_bp
@@ -76,4 +76,4 @@ def internal_error(e):
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     logger.info(f"Starting AI Mentor Backend on port {port}")
-    app.run(debug=True, port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
