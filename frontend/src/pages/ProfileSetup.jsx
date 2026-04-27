@@ -10,7 +10,7 @@ import Input from '../components/Input';
 import { useAppContext } from '../context/AppContext';
 import './ProfileSetup.css';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://kairo-mentor.onrender.com';
 
 /* ── Option sets ─────────────────────────────────────────────────────────────── */
 const INTERESTS  = ['IT', 'Core', 'Govt', 'Startup'];

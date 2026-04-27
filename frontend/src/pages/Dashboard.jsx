@@ -16,7 +16,7 @@ import './Dashboard.css';
 
 const logoPath = '/logo.jpeg';
 const placeholderLogo = 'https://ui-avatars.com/api/?name=K&background=C8A951&color=fff';
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://kairo-mentor.onrender.com';
 
 const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.07 } } };
 const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } };

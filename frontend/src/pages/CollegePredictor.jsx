@@ -11,7 +11,7 @@ import BottomNav from '../components/BottomNav';
 import { useAppContext } from '../context/AppContext';
 import './CollegePredictor.css';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://kairo-mentor.onrender.com';
 
 // Maps JSON short-codes → display name + icon + color + key subjects
 const BRANCH_META = {
